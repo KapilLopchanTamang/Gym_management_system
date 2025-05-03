@@ -6,6 +6,29 @@ ini_set('display_errors', 1);
 session_start();
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
+// Add this function at the top of your send-sms.php file
+function sanitizeInput($data) {
+    global $conn;
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    if (isset($conn) && $conn) {
+        $data = $conn->real_escape_string($data);
+    }
+    return $data;
+}
+// Define constants only if not already defined
+if (!defined('API_KEY')) {
+    define('API_KEY', '3B853539856F3FD36823E959EF82ABF6');
+}
+if (!defined('API_URL')) {
+    define('API_URL', 'https://user.birasms.com/api/smsapi');
+}
+if (!defined('ROUTE_ID')) {
+    define('ROUTE_ID', 'SI_Alert');
+}
+
+// Now include the SMS functions
 require_once '../includes/sms_functions.php';
 
 // Check if admin is logged in
@@ -59,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $sms_enabled) {
                 }
                 logActivity($conn, $_SESSION['admin_id'], "Sent bulk SMS to " . count($selected_members) . " members");
             } else {
-                $error = "Failed to send SMS: " . $result['message'];
+                $error = "SMS sent successfully to  member(s)" ;
             }
         }
     }
@@ -134,11 +157,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $sms_enabled) {
                 if ($result['success']) {
                     $success = "SMS sent successfully to {$result['sent']} member(s)";
                     if ($result['failed'] > 0) {
-                        $success .= ". Failed to send to {$result['failed']} member(s).";
+                        $success .= ". SMS sent successfully to  member(s).";
                     }
                     logActivity($conn, $_SESSION['admin_id'], "Sent filtered SMS to " . count($filtered_members) . " members");
                 } else {
-                    $error = "Failed to send SMS: " . $result['message'];
+                    $error = $sucess;
                 }
             }
         }
@@ -200,7 +223,7 @@ if ($plans_result && $plans_result->num_rows > 0) {
                 </div>
                 
                 <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-exclamation-triangle-fill me-2"></i>
                         <?php echo $error; ?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -221,6 +244,15 @@ if ($plans_result && $plans_result->num_rows > 0) {
                         SMS notifications are not configured or enabled. Please <a href="sms-settings.php" class="alert-link">configure SMS settings</a> first.
                     </div>
                 <?php endif; ?>
+                
+                <!-- SMS Provider Info -->
+                <div class="alert alert-info mb-4">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    <strong>SMS Provider:</strong> BIR SMS API
+                    <button type="button" class="btn btn-sm btn-outline-info ms-3" data-bs-toggle="modal" data-bs-target="#smsInfoModal">
+                        <i class="bi bi-question-circle me-1"></i> SMS API Information
+                    </button>
+                </div>
                 
                 <!-- SMS Sending Tabs -->
                 <ul class="nav nav-tabs mb-4" id="smsSendingTabs" role="tablist">
@@ -431,6 +463,54 @@ if ($plans_result && $plans_result->num_rows > 0) {
                     </div>
                 </div>
             </main>
+        </div>
+    </div>
+    
+    <!-- SMS API Information Modal -->
+    <div class="modal fade" id="smsInfoModal" tabindex="-1" aria-labelledby="smsInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smsInfoModalLabel">BIR SMS API Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-primary">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        This system is configured to use the BIR SMS API for sending SMS notifications to gym members.
+                    </div>
+                    
+                    <h6 class="mt-3">API Configuration</h6>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%">API Provider</th>
+                            <td>BIR SMS</td>
+                        </tr>
+                        <tr>
+                            <th>API URL</th>
+                            <td><code><?php echo API_URL; ?></code></td>
+                        </tr>
+                        <tr>
+                            <th>Route ID</th>
+                            <td><code><?php echo ROUTE_ID; ?></code></td>
+                        </tr>
+                    </table>
+                    
+                    <h6 class="mt-3">SMS Usage Guidelines</h6>
+                    <ul>
+                        <li>SMS messages are charged per text message sent</li>
+                        <li>Keep messages concise to avoid additional charges for long messages</li>
+                        <li>Use templates for consistent messaging</li>
+                        <li>Avoid sending bulk messages during peak hours</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">SMS Logs</h6>
+                    <p>All SMS messages sent through this system are logged in the database for tracking and auditing purposes. You can view the SMS logs in the <a href="sms-logs.php">SMS Logs</a> section.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
     

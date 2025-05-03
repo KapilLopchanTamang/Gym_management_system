@@ -5,12 +5,7 @@ function isLoggedIn() {
 }
 
 // Function to sanitize input data
-function sanitizeInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+
 
 // Function to generate random token for password reset
 function generateToken($length = 32) {

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 25, 2025 at 04:35 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Host: 127.0.0.1
+-- Generation Time: May 03, 2025 at 09:01 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,7 +55,15 @@ INSERT INTO `activity_logs` (`id`, `admin_id`, `action`, `created_at`) VALUES
 (14, 1, 'Created cafe order #ORD-20250425-5566', '2025-04-25 00:57:22'),
 (15, 1, 'Updated status of member #3 to active', '2025-04-25 02:28:09'),
 (16, 1, 'Added new member: rakesh niraula', '2025-04-25 02:29:33'),
-(17, 1, 'Recorded payment of 50 for member #GM00004', '2025-04-25 02:29:33');
+(17, 1, 'Recorded payment of 50 for member #GM00004', '2025-04-25 02:29:33'),
+(18, 1, 'Logged in', '2025-05-03 05:35:34'),
+(19, 1, 'Added new member: Dustin Stout', '2025-05-03 05:36:19'),
+(20, 1, 'Recorded payment of 250 for member #GM00005', '2025-05-03 05:36:19'),
+(21, 1, 'Updated SMS configuration', '2025-05-03 05:56:37'),
+(22, 1, 'Added new member: Shreewah Pokharel', '2025-05-03 06:01:45'),
+(23, 1, 'Recorded payment of 450 for member #GM00006', '2025-05-03 06:01:45'),
+(24, 1, 'Added new member: Bhawana Khadka', '2025-05-03 06:22:41'),
+(25, 1, 'Recorded payment of 450 for member #GM00007', '2025-05-03 06:22:41');
 
 -- --------------------------------------------------------
 
@@ -223,7 +231,10 @@ INSERT INTO `gym_members` (`id`, `member_id`, `first_name`, `last_name`, `email`
 (1, 'GM00001', 'kapil', 'tamang', 'kapil123@gmail.com', '9816308527', 'male', '2002-04-06', 'khorase', '9823232', '232323232', 1, '2025-04-03', '2025-04-03', 'active', 'dads', NULL, '2025-04-03 04:08:25', '2025-04-03 04:33:26'),
 (2, 'GM00002', 'rkaehs', 'saasa', 'asasas1@gmail.com', '1234567896', 'male', '1999-04-03', 'wsdsdsd', '12312342323', '23231212324', 3, '2025-04-03', '2025-09-30', 'active', 'sddsds', NULL, '2025-04-03 04:25:47', '2025-04-03 04:25:47'),
 (3, 'GM00003', 'wdsd', 'sdsd', 'asde@gmail.com', '34234344232', 'male', NULL, '23wedw', '1234567890', '1234567890', 3, '2025-04-03', '2025-09-30', 'active', 'sods', NULL, '2025-04-03 04:31:07', '2025-04-03 04:31:52'),
-(4, 'GM00004', 'rakesh', 'niraula', 'rakesh@123gmail.com', '9816308527', 'male', '2002-04-25', 'bhauna', '9816308527', '9821728932', 1, '2025-04-25', '2025-05-25', 'active', 'kapilsasa', NULL, '2025-04-25 02:29:33', '2025-04-25 02:29:33');
+(4, 'GM00004', 'rakesh', 'niraula', 'rakesh@123gmail.com', '9816308527', 'male', '2002-04-25', 'bhauna', '9816308527', '9821728932', 1, '2025-04-25', '2025-05-25', 'active', 'kapilsasa', NULL, '2025-04-25 02:29:33', '2025-04-25 02:29:33'),
+(5, 'GM00005', 'Dustin', 'Stout', 'incpractical@gmail.com', '9811388848', 'male', '2025-05-03', '171 White Hague Court\r\nModi voluptas dolore', '9811388848', '9811388848', 3, '2025-05-03', '2025-10-30', 'active', 'sathy', NULL, '2025-05-03 05:36:19', '2025-05-03 05:36:19'),
+(6, 'GM00006', 'Shreewah', 'Pokharel', 'shree@gmail.com', '9765470926', 'male', NULL, '63 White Milton Drive\\r\\nAccusamus quod delen', '9765470926', '9765470926', 4, '2025-05-03', '2026-05-03', 'active', 'test', NULL, '2025-05-03 06:01:45', '2025-05-03 06:01:45'),
+(7, 'GM00007', 'Bhawana', 'Khadka', 'incpractical@gmail.com', '9862810555', 'female', '2025-05-03', 'Inaruwa-1, purwatole\\r\\nDuhabi road, 445H PK colony', '9862810555', '9862810555', 4, '2025-05-03', '2026-05-03', 'active', 'Surubho', NULL, '2025-05-03 06:22:41', '2025-05-03 06:22:41');
 
 -- --------------------------------------------------------
 
@@ -250,7 +261,10 @@ INSERT INTO `membership_history` (`id`, `member_id`, `membership_id`, `start_dat
 (1, 2, 3, '2025-04-03', '2025-09-30', 1, 'active', '2025-04-03 04:25:47'),
 (2, 3, 2, '2025-04-03', '2025-07-02', 2, 'active', '2025-04-03 04:31:07'),
 (3, 3, 3, '2025-04-03', '2025-09-30', 3, 'active', '2025-04-03 04:31:52'),
-(4, 4, 1, '2025-04-25', '2025-05-25', 4, 'active', '2025-04-25 02:29:33');
+(4, 4, 1, '2025-04-25', '2025-05-25', 4, 'active', '2025-04-25 02:29:33'),
+(5, 5, 3, '2025-05-03', '2025-10-30', 5, 'active', '2025-05-03 05:36:19'),
+(6, 6, 4, '2025-05-03', '2026-05-03', 6, 'active', '2025-05-03 06:01:45'),
+(7, 7, 4, '2025-05-03', '2026-05-03', 7, 'active', '2025-05-03 06:22:41');
 
 -- --------------------------------------------------------
 
@@ -301,7 +315,8 @@ CREATE TABLE `notifications` (
 INSERT INTO `notifications` (`id`, `type`, `member_id`, `message`, `is_read`, `created_at`) VALUES
 (1, 'expiring_membership', 1, 'Membership for kapil tamang will expire on 2025-04-03', 0, '2025-04-03 04:33:29'),
 (2, 'expired_membership', 1, 'Membership has expired on 2025-04-03', 0, '2025-04-24 02:19:07'),
-(3, 'expired_membership', 1, 'Membership has expired on 2025-04-03', 0, '2025-04-25 00:50:06');
+(3, 'expired_membership', 1, 'Membership has expired on 2025-04-03', 0, '2025-04-25 00:50:06'),
+(4, 'expired_membership', 1, 'Membership has expired on 2025-04-03', 0, '2025-05-03 05:35:34');
 
 -- --------------------------------------------------------
 
@@ -344,7 +359,10 @@ INSERT INTO `payments` (`id`, `member_id`, `amount`, `payment_date`, `payment_me
 (1, 2, 250.00, '2025-04-03', 'cash', 'Payment for Half-yearly', 'R20250403062547', 1, '2025-04-03 04:25:47'),
 (2, 3, 135.00, '2025-04-03', 'cash', 'Payment for Quarterly', 'R20250403063107', 1, '2025-04-03 04:31:07'),
 (3, 3, 250.00, '2025-04-03', 'cash', 'Renewal payment for Half-yearly', 'R20250403063152', 1, '2025-04-03 04:31:52'),
-(4, 4, 50.00, '2025-04-25', 'cash', 'Payment for Monthly', 'R20250425042933', 1, '2025-04-25 02:29:33');
+(4, 4, 50.00, '2025-04-25', 'cash', 'Payment for Monthly', 'R20250425042933', 1, '2025-04-25 02:29:33'),
+(5, 5, 250.00, '2025-05-03', 'cash', 'Payment for Half-yearly', '0', 1, '2025-05-03 05:36:19'),
+(6, 6, 450.00, '2025-05-03', 'cash', 'Payment for Annual', '0', 1, '2025-05-03 06:01:45'),
+(7, 7, 450.00, '2025-05-03', 'cash', 'Payment for Annual', '0', 1, '2025-05-03 06:22:41');
 
 -- --------------------------------------------------------
 
@@ -363,6 +381,13 @@ CREATE TABLE `sms_config` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `sms_config`
+--
+
+INSERT INTO `sms_config` (`id`, `api_provider`, `api_endpoint`, `api_key`, `sender_id`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'BIR SMS', 'https://user.birasms.com/api/smsapi', '3B853539856F3FD36823E959EF82ABF6', 'SI_Alert', 1, '2025-05-03 05:52:33', '2025-05-03 05:56:37');
+
 -- --------------------------------------------------------
 
 --
@@ -379,6 +404,27 @@ CREATE TABLE `sms_logs` (
   `error_message` text DEFAULT NULL,
   `sent_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sms_logs`
+--
+
+INSERT INTO `sms_logs` (`id`, `member_id`, `phone_number`, `message`, `template_id`, `status`, `error_message`, `sent_at`) VALUES
+(1, 5, '9811388848', 'Dear Dustin Stout, welcome to our gym! Your Half-yearly membership is now active until 30-10-2025. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 05:58:53'),
+(2, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:01:45'),
+(3, 1, '9816308527', 'Dear kapil tamang, welcome to our gym! Your Monthly membership is now active until 03-04-2025. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:09:16'),
+(4, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:11:27'),
+(5, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:13:00'),
+(6, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:15:08'),
+(7, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:15:17'),
+(8, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:15:30'),
+(9, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:15:52'),
+(10, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:17:27'),
+(11, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:18:16'),
+(12, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:19:16'),
+(13, 6, '9765470926', 'Dear Shreewah Pokharel, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:19:57'),
+(14, 1, '9816308527', 'Dear kapil tamang, your Monthly membership will expire on 03-04-2025. Please visit our gym to renew your membership. Thank you!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:21:04'),
+(15, 7, '9862810555', 'Dear Bhawana Khadka, welcome to our gym! Your Annual membership is now active until 03-05-2026. Thank you for joining us!', NULL, 'failed', 'Unknown error occurred', '2025-05-03 06:22:42');
 
 -- --------------------------------------------------------
 
@@ -519,7 +565,7 @@ ALTER TABLE `sms_templates`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -549,13 +595,13 @@ ALTER TABLE `cafe_products`
 -- AUTO_INCREMENT for table `gym_members`
 --
 ALTER TABLE `gym_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `membership_history`
 --
 ALTER TABLE `membership_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `membership_plans`
@@ -567,7 +613,7 @@ ALTER TABLE `membership_plans`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -579,19 +625,19 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sms_config`
 --
 ALTER TABLE `sms_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sms_logs`
 --
 ALTER TABLE `sms_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sms_templates`
